@@ -16,4 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+    Route::apiResource('usuarios', 'UsuarioController');
+    Route::apiResource('destinos', 'DestinoController');
+    Route::apiResource('experiencias', 'ExperienciaController');
+    Route::apiResource('proveedores-locales', 'ProveedorLocalController');
+    Route::apiResource('resenas', 'ResenaController');
+    Route::apiResource('reservas', 'ReservaController');
+    Route::apiResource('categorias-sostenibilidad', 'CategoriaSostenibilidadController');
+    Route::apiResource('experiencias-categorias', 'ExperienciaCategoriaController');
+
 });
