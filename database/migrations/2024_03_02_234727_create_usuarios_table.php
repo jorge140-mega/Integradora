@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('correo');
+            $table->string('correo')->unique();
+            $table->timestamp('Verificacion_email')->nullable();
+            $table->boolean('is_admin')->default(false); // Modificado aquí, eliminado 'after `email`'
             $table->string('contraseña');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -26,5 +29,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('usuarios');
+        Schema::table('usuarios', function (Blueprint $table) {
+            $table->dropColumn('is_admin');
+        });
     }
 };

@@ -8,9 +8,14 @@ use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('is_admin')->except(['show', 'update']); // Aplica a todos excepto a 'show' y 'update'
+    }
     public function index()
     {
-        return Usuario ::all();
+        $this->authorize('viewAny', Usuario::class);
+        return Usuario::all();
     }
 
     public function store(Request $request)
